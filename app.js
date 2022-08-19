@@ -69,6 +69,8 @@ const divModal = document.querySelector('.lightbox');
 const imgModal = document.querySelector('.lightbox__image');
 const btnModalClose = document.querySelector('.lightbox__button');
 const divModalClose = document.querySelector('.lightbox__overlay');
+const divOpenModal = document.querySelector('.lightbox__content');
+    
 
 ul.insertAdjacentHTML('beforeend', gallery(galleryItems));
 
@@ -92,17 +94,57 @@ function gallery (galleryItems){
   .join('');
 }
 
+
 ul.addEventListener('click', addModalBtn);
 function addModalBtn(e) { 
   if (e.target.nodeName === 'IMG') {
+
+
     divModal.classList.add('is-open');
     imgModal.src = e.target.dataset.source;
+    imgModal.alt = e.target.alt;
+  
+    let currentA = null;
 
+    if (!currentA) {
+         currentA = e.target;
+    }
+    
+
+    ul.addEventListener('keydown', (e) => {
+       
+       
+      if (e.key === 'ArrowLeft') {        
+        let nextLi = currentA.parentElement.parentElement.previousElementSibling;
+        let nextImg = nextLi.querySelector('.gallery__image');
+        currentA = nextImg; 
+        imgModal.setAttribute('src', currentA.dataset.source);
+        console.log(currentA);
+  
+      }else if(e.key === 'ArrowRight') {
+        let nextLi = currentA.parentElement.parentElement.nextElementSibling;
+        let nextImg = nextLi.querySelector('.gallery__image');
+        currentA = nextImg; 
+        imgModal.setAttribute('src', currentA.dataset.source);
+        console.log(currentA);
+      }
+      
+        
+  })
+
+  }
     if (divModal.classList.contains('is-open')) {
      document.addEventListener('keydown', closeModalEscape);
-   }
-  }
+    }
+   
+  
  
+
+
+
+
+   
+
 
 }
 
@@ -134,3 +176,18 @@ function scriptForCloseModal() {
   }
 }
 
+
+ 
+
+
+/*
+function fniz(e) { 
+  if (e.key === 'ArrowLeft') {
+    console.log(imgModal.src);
+        imgModal.src = e.target.parentElement.nextElementSibling.getElementsByTagName('img')[0].dataset.source;
+  }
+  }
+ document.addEventListener('keydown', fniz);
+  
+
+  */
