@@ -104,16 +104,25 @@ function addModalBtn(e) {
     imgModal.src = e.target.dataset.source;
     imgModal.alt = e.target.alt;
   
+ 
+
     let currentA = null;
     const itemCount = 9;
     if (!currentA) {
          currentA = e.target;
     }
-    
+       imgModal.addEventListener('touchstart', (e) => {
+         console.log(e.target); 
+        let nextLi = currentA.parentElement.parentElement.nextElementSibling;
+        if (nextLi) {
+            let nextImg = nextLi.querySelector('.gallery__image'); 
+            currentA = nextImg;       
+            imgModal.setAttribute('src', currentA.dataset.source);
+            console.log(currentA);
+        }  
+     })
 
-    ul.addEventListener('keydown', (e) => {
-     
-       
+    ul.addEventListener('keydown', (e) => {       
       if (e.key === 'ArrowLeft') {        
         let nextLi = currentA.parentElement.parentElement.previousElementSibling;
         if (nextLi) {
