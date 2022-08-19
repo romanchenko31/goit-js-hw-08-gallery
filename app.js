@@ -105,44 +105,39 @@ function addModalBtn(e) {
     imgModal.alt = e.target.alt;
   
     let currentA = null;
-
+    const itemCount = 9;
     if (!currentA) {
          currentA = e.target;
     }
     
 
     ul.addEventListener('keydown', (e) => {
-       
+     
        
       if (e.key === 'ArrowLeft') {        
         let nextLi = currentA.parentElement.parentElement.previousElementSibling;
-        let nextImg = nextLi.querySelector('.gallery__image');
-        currentA = nextImg; 
-        imgModal.setAttribute('src', currentA.dataset.source);
-        console.log(currentA);
-  
+        if (nextLi) {
+          let nextImg = nextLi.querySelector('.gallery__image');
+          currentA = nextImg; 
+          imgModal.setAttribute('src', currentA.dataset.source);
+          console.log(currentA);
+        } 
       }else if(e.key === 'ArrowRight') {
-        let nextLi = currentA.parentElement.parentElement.nextElementSibling;
-        let nextImg = nextLi.querySelector('.gallery__image');
-        currentA = nextImg; 
-        imgModal.setAttribute('src', currentA.dataset.source);
-        console.log(currentA);
-      }
-      
+          let nextLi = currentA.parentElement.parentElement.nextElementSibling;
+        if (nextLi) {
+            let nextImg = nextLi.querySelector('.gallery__image'); 
+            currentA = nextImg;       
+            imgModal.setAttribute('src', currentA.dataset.source);
+            console.log(currentA);
+        }
         
+      }        
   })
 
   }
     if (divModal.classList.contains('is-open')) {
      document.addEventListener('keydown', closeModalEscape);
     }
-   
-  
- 
-
-
-
-
    
 
 
@@ -180,14 +175,3 @@ function scriptForCloseModal() {
  
 
 
-/*
-function fniz(e) { 
-  if (e.key === 'ArrowLeft') {
-    console.log(imgModal.src);
-        imgModal.src = e.target.parentElement.nextElementSibling.getElementsByTagName('img')[0].dataset.source;
-  }
-  }
- document.addEventListener('keydown', fniz);
-  
-
-  */
